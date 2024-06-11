@@ -19,21 +19,32 @@ export class UserRepository {
     return possibleUser !== undefined;
   }
 
-  async update(id: string, updateData: Partial<UserEntity>) {
+  private searchId(id: string) {
     const possibleUser = this.users.find((userSave) => userSave.id === id);
 
     if (!possibleUser) {
       throw new Error("User don't exist");
     }
 
+    return possibleUser;
+  }
+
+  async update(id: string, updateData: Partial<UserEntity>) {
+    const user = this.searchId(id);
     Object.entries(updateData).forEach(([key, value]) => {
       if (key === 'id') {
         return;
       }
 
-      possibleUser[key] = value;
+      user[key] = value;
     });
 
-    return possibleUser;
+    return user;
+  }
+
+  async remove(id: string) {
+    const user = this.searchId(id);
+    this.users = this.users.filter((userSave) => userSave.id !== id);
+    return user;
   }
 }
