@@ -4,7 +4,7 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 
 @Injectable()
 export class PostgressConfigService implements TypeOrmOptionsFactory {
-  // When the class is export have a excution in constructor
+  // When the class is export have a execution in constructor
   constructor(private configService: ConfigService) {}
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {

@@ -15,11 +15,11 @@ import {
 export class ProductCharacteristicDTO {
   @IsString()
   @IsNotEmpty()
-  nome: string;
+  name: string;
 
   @IsString()
   @IsNotEmpty()
-  descricao: string;
+  description: string;
 }
 
 export class ProductImageDTO {
@@ -28,7 +28,7 @@ export class ProductImageDTO {
 
   @IsString()
   @IsNotEmpty()
-  descricao: string;
+  description: string;
 }
 
 export class CreateProductDTO {
