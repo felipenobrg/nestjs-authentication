@@ -14,7 +14,7 @@ import { CreateProductDTO } from './dto/CreateProduct.dto';
 import { UpdateProductDTO } from './dto/UpdateProduct.dto';
 
 @Controller('produtos')
-export class ProdutoController {
+export class ProductController {
   constructor(private readonly productRepository: ProductRepository) {}
 
   @Post()
