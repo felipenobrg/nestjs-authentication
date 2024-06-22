@@ -28,8 +28,8 @@ export class ProductController {
     product.quantity = productData.quantity;
     product.description = productData.description;
     product.category = productData.category;
-    product.characteristic = productData.characteristic;
-    product.image = productData.image;
+    // product.characteristic = productData.characteristic;
+    // product.image = productData.image;
 
     const produtoCadastrado = this.productRepository.save(product);
     return produtoCadastrado;

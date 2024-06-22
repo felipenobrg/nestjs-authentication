@@ -25,10 +25,10 @@ export class ProductRepository {
   }
 
   async update(id: string, productData: Partial<ProductEntity>) {
-    const dadosNaoAtualizaveis = ['id', 'userId'];
+    const dataNotUpdated = ['id', 'userId'];
     const product = this.searchId(id);
     Object.entries(productData).forEach(([key, value]) => {
-      if (dadosNaoAtualizaveis.includes(key)) {
+      if (dataNotUpdated.includes(key)) {
         return;
       }
       product[key] = value;
