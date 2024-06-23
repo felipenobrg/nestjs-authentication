@@ -14,7 +14,7 @@ import { CreateProductDTO } from './dto/CreateProduct.dto';
 import { UpdateProductDTO } from './dto/UpdateProduct.dto';
 import { ProductService } from './product.service';
 
-@Controller('produtos')
+@Controller('products')
 export class ProductController {
   constructor(
     private readonly productRepository: ProductRepository,
@@ -22,7 +22,7 @@ export class ProductController {
   ) {}
 
   @Post()
-  async criaNovo(@Body() productData: CreateProductDTO) {
+  async createNewProduct(@Body() productData: CreateProductDTO) {
     const product = new ProductEntity();
 
     product.id = randomUUID();
