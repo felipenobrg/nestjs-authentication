@@ -17,19 +17,27 @@ export class ProductService {
   }
 
   async listProducts() {
-    const productSaved = await this.productRepository.find();
+    const productSaved = await this.productRepository.find({
+      relations: ['characteristics', 'images'],
+    });
     const productList = productSaved.map(
       (product) =>
         new ProductDTO(
           product.id,
           product.userId,
           product.name,
-          product.price,
+          product.value,
           product.quantity,
           product.description,
           product.category,
-          product.features,
-          product.images,
+          product.characteristics.map((c) => ({
+            name: c.name,
+            description: c.description,
+          })),
+          product.images.map((i) => ({
+            url: i.url,
+            description: i.description,
+          })),
         ),
     );
 
