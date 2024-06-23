@@ -4,6 +4,7 @@ import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserListDTO } from './dto/UserList.dto';
 import { UpdateUserDTO } from './dto/UpdateUser.dto';
+import { CreateUserDto } from './dto/CreateUser.dto';
 
 @Injectable()
 export class UserService {
@@ -12,7 +13,7 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async createUser(userEntity: UserEntity) {
+  async createUser(userEntity: CreateUserDto) {
     await this.userRepository.save(userEntity);
   }
 

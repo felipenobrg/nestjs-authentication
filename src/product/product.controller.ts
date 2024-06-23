@@ -12,10 +12,14 @@ import { ProductEntity } from './product.entity';
 import { ProductRepository } from './product.repository';
 import { CreateProductDTO } from './dto/CreateProduct.dto';
 import { UpdateProductDTO } from './dto/UpdateProduct.dto';
+import { ProductService } from './product.service';
 
 @Controller('produtos')
 export class ProductController {
-  constructor(private readonly productRepository: ProductRepository) {}
+  constructor(
+    private readonly productRepository: ProductRepository,
+    private readonly productService: ProductService,
+  ) {}
 
   @Post()
   async criaNovo(@Body() productData: CreateProductDTO) {
@@ -31,34 +35,31 @@ export class ProductController {
     // product.characteristic = productData.characteristic;
     // product.image = productData.image;
 
-    const produtoCadastrado = this.productRepository.save(product);
-    return produtoCadastrado;
+    const productRegistred = this.productService.createProduct(product);
+    return productRegistred;
   }
 
   @Get()
-  async listaTodos() {
-    return this.productRepository.listAll();
+  async listAll() {
+    return this.productService.listProducts();
   }
 
   @Put('/:id')
-  async atualiza(
-    @Param('id') id: string,
-    @Body() productData: UpdateProductDTO,
-  ) {
-    const produtoAlterado = await this.productRepository.update(
+  async update(@Param('id') id: string, @Body() productData: UpdateProductDTO) {
+    const productChanged = await this.productService.updateProduct(
       id,
       productData,
     );
 
     return {
       message: 'Product updated successfully',
-      product: produtoAlterado,
+      product: productChanged,
     };
   }
 
   @Delete('/:id')
   async remove(@Param('id') id: string) {
-    const removedProduct = await this.productRepository.remove(id);
+    const removedProduct = await this.productService.removeProduct(id);
 
     return {
       message: 'Product removided successfully',
